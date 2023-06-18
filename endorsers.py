@@ -118,7 +118,7 @@ def get_top_violators(args: Args, citizens: List[str], endorsements: List[str]) 
             if int(numendos) == 0:
                 search = False
                 break
-            elif name in args.exclude:
+            elif name == args.delegate or name in args.exclude:
                 continue
             elif name not in endorsements and numendos > args.basecap:
                 violators[name] = numendos - args.basecap
