@@ -41,8 +41,8 @@ class Violator:
 
 def parse_args() -> Args:
     parser = argparse.ArgumentParser(
-        prog="Endorsers",
-        description="A script to find nations that are endorsing endocap violators."
+        prog="Violators",
+        description="A script to find nations that are violating an endocap."
     )
     parser.add_argument('-u', '--user', help=arghelp['u'], type=str, required=True)
     parser.add_argument('-d', '--delegate', help=arghelp['d'], type=str, default="le_libertia", required=False)
