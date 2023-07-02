@@ -1,1 +1,3 @@
 violators -u nation_name -k api_key -x le_libertia -x mancheseva_city -x pichtonia -x pland_adanna -x primorye_oblast -x gravandius
+
+PAUSE
