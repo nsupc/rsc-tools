@@ -3,3 +3,5 @@ venv/*
 .DS_Store
 Makefile
 output.*
+.justfile
+bin/*

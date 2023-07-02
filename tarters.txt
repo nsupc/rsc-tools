@@ -1,0 +1,1 @@
+tarters -u nation_name -k api_key -x mancheseva_city -x pichtonia -x primorye_oblast -x pland_adanna -x gravandius
