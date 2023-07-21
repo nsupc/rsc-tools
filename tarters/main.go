@@ -384,6 +384,7 @@ func main() {
 
 	args := Args{
 		User:     strings.ToLower(strings.ReplaceAll(arguments.User, " ", "_")),
+		Key: 	  arguments.Key,
 		Delegate: strings.ToLower(strings.ReplaceAll(arguments.Delegate, " ", "_")),
 		Region:   strings.ToLower(strings.ReplaceAll(arguments.Region, " ", "_")),
 		Excluded: arguments.Excluded,
