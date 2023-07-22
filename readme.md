@@ -27,7 +27,7 @@ A collection of tools for Europeia's Regional Security Council.
 
 ### Configuration Options
 
-The script contains a number of required and optional configuration options. These can be set by editing the file 'run.txt' in a text editor. The following options are available:
+The script contains a number of required and optional configuration options. These can be set by editing the file 'endorsers.bat' in a text editor. The following options are available:
 
 - -u: The name of your main nation. [Required]
   - Usage: -u upc
@@ -65,7 +65,7 @@ The script contains a number of required and optional configuration options. The
 
 ### Configuration Options
 
-The script contains a number of required and optional configuration options. These can be set by editing the file 'run.txt' in a text editor. The following options are available:
+The script contains a number of required and optional configuration options. These can be set by editing the file 'tarters.bat' in a text editor. The following options are available:
 
 - -u: The name of your main nation. [Required]
   - Usage: -u upc
@@ -104,7 +104,7 @@ The script contains a number of required and optional configuration options. The
 
 ### Configuration Options
 
-The script contains a number of required and optional configuration options. These can be set by editing the file 'run.txt' in a text editor. The following options are available:
+The script contains a number of required and optional configuration options. These can be set by editing the file 'violators.bat' in a text editor. The following options are available:
 
 - -u: The name of your main nation. [Required]
   - Usage: -u upc
