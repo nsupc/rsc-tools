@@ -3,6 +3,7 @@
 A collection of tools for Europeia's Regional Security Council.
 
 - endorsers: Reports nations that are endorsing endocap violators. Optionally returns the violators that each nation is endorsing.
+- nopers: Sorts nations that are not endorsing the target into batches for quick telegramming
 - tarters: An endotarting tool designed with Europeia's endocap system in mind. Gives the user a list of nations to endorse or unendorse.
 - violators: Reports nations that are exceeding their endocap and by how much.
 
@@ -91,6 +92,29 @@ The script contains a number of required and optional configuration options. The
 - -l: The limit -- the number of endorsements below a nation's cap that qualify it for endotarting. [Optional]
   - Default: 5
   - Usage: -l 10
+
+## nopers
+
+1. Create a new text file in the same folder as the tool and call it 'nopers.txt'.
+2. Open the file in a text editor and copy the template from this repository's [example](https://github.com/nsupc/rsc-tools/blob/main/scripts/nopers.txt).
+3. Replace the text 'nation_name' with the name of your main nation.
+4. Save the file as 'nopers.bat'.
+5. Run 'nopers.bat'.
+
+### Configuration Options
+
+The script contains a number of required and optional configuration options. These can be set by editing the file 'nopers.bat' in a text editor. The following options are available:
+
+- -u: The name of your main nation. [Required]
+  - Usage: -u upc
+- -r: The region to check. [Optional]
+  - Default: europeia
+  - Usage: -r the_north_pacific
+- -c: The number of nations to add to each telegram batch. A number between 1 and 8. [Optional]
+  - Default: 8
+  - Usage: -c 4
+- -t: The telegram template to autofill for each batch. [Optional]
+    - Usage: -t %TEMPLATE-69420%
 
 ## violators
 
