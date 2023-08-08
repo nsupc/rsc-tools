@@ -145,7 +145,6 @@ func getDelegateEndorsements(client *http.Client, user string, del string) []str
 }
 
 func getTopViolators(client *http.Client, args Args, citizens []string, delendos []string) map[string]int {
-	// A map of nation names with the number of endorsements by which they exceed their cap
 	endorsements := make(map[string]int)
 
 	offset := 1
@@ -249,8 +248,6 @@ func getViolatorEndorsements(client *http.Client, args Args, violators map[strin
 		}
 
 		for _, endorser := range strings.Split(nation.Endorsements, ",") {
-			// if the endorser already exists in the map, increment their count
-			// otherwise, add them to the map with a count of 1
 			if entry, ok := endorsers[endorser]; ok {
 				entry.percentage += percentage
 				entry.endorsing = append(entry.endorsing, violator)

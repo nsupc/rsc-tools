@@ -78,29 +78,23 @@ func contains(s []string, e string) bool {
 
 func getCitizenNations(key string) []string {
 
-	// Create a new context and set the API key
 	ctx := context.Background()
 
-	// Create a new HTTP client with the API key
 	httpClient := option.WithAPIKey(key)
 
-	// Create a new service client
 	service, err := sheets.NewService(ctx, httpClient)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Spreadsheet parameters
 	spreadsheetID := "1Zi2HtQuykoWV2P36B61J_eBnhSgj3VyDWFUbtbYWyTo"
 	readRange := "Citizens!C2:C"
 
-	// Read the data from the spreadsheet
 	response, err := service.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Create a string slice from the response data
 	var data []string
 	for _, i := range response.Values {
 		data = append(data, i[0].(string))
@@ -118,20 +112,17 @@ func getDelegateEndorsements(client *http.Client, user string, del string) []str
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", user))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
 	}
 	defer response.Body.Close()
 
-	// Read the response body
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal("Error reading the response body:", err)
 	}
 
-	// Parse the XML response
 	var nation Nation
 	err = xml.Unmarshal(body, &nation)
 	if err != nil {
@@ -144,7 +135,6 @@ func getDelegateEndorsements(client *http.Client, user string, del string) []str
 }
 
 func getTopViolators(client *http.Client, args Args, citizens []string, delendos []string) []Violator {
-	// A map of nation names with the number of endorsements by which they exceed their cap
 	endorsements := make(map[string]int)
 
 	offset := 1
@@ -161,20 +151,17 @@ outer:
 
 		req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", args.User))
 
-		// Make the API request
 		response, err := client.Do(req)
 		if err != nil {
 			log.Fatal("Error making the API request:", err)
 		}
 		defer response.Body.Close()
 
-		// Read the response body
 		body, err := io.ReadAll(response.Body)
 		if err != nil {
 			log.Fatal("Error reading the response body:", err)
 		}
 
-		// Parse the XML response
 		var region Region
 		err = xml.Unmarshal(body, &region)
 		if err != nil {
@@ -211,7 +198,6 @@ outer:
 		time.Sleep(time.Second)
 	}
 
-	// sort the map by value and convert to a list of Violators
 	violators := make([]Violator, 0, len(endorsements))
 
 	for k, v := range endorsements {

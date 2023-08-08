@@ -105,17 +105,14 @@ func getCitizenNations(key string) []string {
 		log.Fatal(err)
 	}
 
-	// Spreadsheet parameters
 	spreadsheetID := "1Zi2HtQuykoWV2P36B61J_eBnhSgj3VyDWFUbtbYWyTo"
 	readRange := "Citizens!C2:C"
 
-	// Read the data from the spreadsheet
 	response, err := service.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Create a string slice from the response data
 	var data []string
 	for _, i := range response.Values {
 		data = append(data, i[0].(string))
@@ -133,20 +130,17 @@ func getDelegateEndorsements(client *http.Client, user string, del string) []str
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", user))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
 	}
 	defer response.Body.Close()
 
-	// Read the response body
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal("Error reading the response body:", err)
 	}
 
-	// Parse the XML response
 	var nation Nation
 	err = xml.Unmarshal(body, &nation)
 	if err != nil {
@@ -173,20 +167,17 @@ outer:
 
 		req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", user))
 
-		// Make the API request
 		response, err := client.Do(req)
 		if err != nil {
 			log.Fatal("Error making the API request:", err)
 		}
 		defer response.Body.Close()
 
-		// Read the response body
 		body, err := io.ReadAll(response.Body)
 		if err != nil {
 			log.Fatal("Error reading the response body:", err)
 		}
 
-		// Parse the XML response
 		var region Region
 		err = xml.Unmarshal(body, &region)
 		if err != nil {
@@ -217,27 +208,23 @@ func addAllWAs(client *http.Client, user string, region string, nations map[stri
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", user))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
 	}
 	defer response.Body.Close()
 
-	// Read the response body
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal("Error reading the response body:", err)
 	}
 
-	// Parse the XML response
 	var reg EndoRegion
 	err = xml.Unmarshal(body, &region)
 	if err != nil {
 		log.Fatal("Error parsing the XML response:", err)
 	}
 
-	// If a nation is not already in the map, add it with 0 endorsements
 	for _, nation := range strings.Split(reg.Nations, ",") {
 		if _, ok := nations[nation]; !ok {
 			if nation != "" {
@@ -258,7 +245,6 @@ func getDump(client *http.Client, user string) {
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Tarters/1.0 (%s)", user))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
@@ -269,7 +255,6 @@ func getDump(client *http.Client, user string) {
 }
 
 func getNationsEndorseBy(target string) []string {
-	// read nations.xml and get the names of nations that the target nation is endorsing
 	endorsing := []string{}
 
 	xmlData, err := os.ReadFile("nations.xml")
@@ -277,14 +262,12 @@ func getNationsEndorseBy(target string) []string {
 		log.Fatal(err)
 	}
 
-	// Unmarshal XML data into Nations struct
 	var nations Nations
 	err = xml.Unmarshal(xmlData, &nations)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Iterate over each nation and check if the target string is present in the <ENDORSEMENTS> attribute
 	for _, nation := range nations.Nations {
 		endorsements := strings.Split(nation.Endorsements, ",")
 		for _, endorsement := range endorsements {
@@ -384,7 +367,7 @@ func main() {
 
 	args := Args{
 		User:     strings.ToLower(strings.ReplaceAll(arguments.User, " ", "_")),
-		Key: 	  arguments.Key,
+		Key:      arguments.Key,
 		Delegate: strings.ToLower(strings.ReplaceAll(arguments.Delegate, " ", "_")),
 		Region:   strings.ToLower(strings.ReplaceAll(arguments.Region, " ", "_")),
 		Excluded: arguments.Excluded,

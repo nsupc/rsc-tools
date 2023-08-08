@@ -55,20 +55,17 @@ func get_nation_details(client *http.Client, nation string) Nation {
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Nopers/1.0 (%s)", nation))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
 	}
 	defer response.Body.Close()
 
-	// Read the response body
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal("Error reading the response body:", err)
 	}
 
-	// Parse the XML response
 	var nat Nation
 	err = xml.Unmarshal(body, &nat)
 	if err != nil {
@@ -89,20 +86,17 @@ func get_wa_nations(client *http.Client, region string) []string {
 
 	req.Header.Set("User-Agent", fmt.Sprintf("Nopers/1.0 (%s)", arguments.User))
 
-	// Make the API request
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Error making the API request:", err)
 	}
 	defer response.Body.Close()
 
-	// Read the response body
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal("Error reading the response body:", err)
 	}
 
-	// Parse the XML response
 	var reg Region
 	err = xml.Unmarshal(body, &reg)
 	if err != nil {
@@ -115,10 +109,6 @@ func get_wa_nations(client *http.Client, region string) []string {
 }
 
 func output_results(targets []string, template string, batchSize int) {
-	// create output html file
-	// break targets into batches of args.Count
-	// create link to send telegram to each batch
-	// append to list on html file
 
 	f, err := os.Create("output.html")
 	if err != nil {
